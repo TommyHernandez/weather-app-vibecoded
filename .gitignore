@@ -10,6 +10,9 @@ dist
 coverage
 *.lcov
 
+# runtime data
+weather-data.json
+
 # logs
 logs
 _.log

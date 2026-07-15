@@ -1,8 +1,14 @@
 {
   "name": "02-weather",
+  "description": "A simple terminal app to know the weather in a concrete city",
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "build": "bun build index.ts --outdir dist",
+    "start": "bun index.ts",
+    "dev": "bun --hot index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
