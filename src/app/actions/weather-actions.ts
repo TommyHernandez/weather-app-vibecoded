@@ -1,11 +1,12 @@
 import { getCurrentWeather, getDailyForecast } from "../../services/weather.service.ts"
 import type { AppState, SavedCity } from "../../types/app.ts"
 import type { DailyForecastSnapshot, WeatherSnapshot } from "../../types/weather-api.ts"
+import { colors } from "../../ui/colors.ts"
 import { error, info, muted, success, warning } from "../../ui/messages.ts"
 import { cityLabel, cityMatches, resolveCity, updateStateCityReferences } from "./shared.ts"
 
 function weatherLine(city: SavedCity, weather: WeatherSnapshot): string {
-  return `${cityLabel(city)}: ${weather.temperature}${weather.unitLabel}`
+  return `${cityLabel(city)}: ${colors.yellow(`${weather.temperature}${weather.unitLabel}`)}`
 }
 
 function dayLabel(isoDate: string): string {
@@ -25,7 +26,9 @@ function printForecast(city: SavedCity, forecast: DailyForecastSnapshot): void {
   info(`Pronóstico 7 días: ${cityLabel(city)}`)
   forecast.items.forEach((item) => {
     const label = dayLabel(item.date).padEnd(12, " ")
-    console.log(`  ${label} min ${item.min}${forecast.unitLabel} | max ${item.max}${forecast.unitLabel}`)
+    const minValue = colors.yellow(`${item.min}${forecast.unitLabel}`)
+    const maxValue = colors.yellow(`${item.max}${forecast.unitLabel}`)
+    console.log(`  ${label} min ${minValue} | max ${maxValue}`)
   })
 }
 

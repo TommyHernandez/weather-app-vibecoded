@@ -4,7 +4,7 @@
 
 Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/app/app.ts`.
 
-Latest implemented iteration: **Iteration 3 (7-day forecast)**.
+Latest implemented iteration: **Iteration 4 (color consistency)**.
 
 Current behavior highlights:
 
@@ -14,6 +14,7 @@ Current behavior highlights:
 - Selected city is stored with coordinates to avoid future ambiguity.
 - New menu option to show 7-day forecast for default city.
 - Forecast output prints daily min/max temperatures for 7 days.
+- Color convention is now consistent: cyan menu/info, yellow temperatures, green success, red errors.
 
 Current architecture is split by responsibility:
 
@@ -88,4 +89,4 @@ Validation commands used during implementation:
 
 ## Next Iterations (Roadmap)
 
-1. **Iteration 4**: color consistency pass (menu/info/temp/success/error).
+1. Optional polish: improve warning/muted tone balance for long sessions.

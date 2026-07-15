@@ -12,6 +12,13 @@ La app permite:
 - Ver pronóstico de 7 días para la ciudad default.
 - Cambiar unidades entre `°C` y `°F`.
 
+Convención visual actual:
+
+- Menú e información en cyan.
+- Temperaturas destacadas en amarillo.
+- Mensajes de éxito en verde.
+- Mensajes de error en rojo.
+
 ## Stack
 
 - Bun.js
