@@ -1,0 +1,8 @@
+[test]
+root = "test"
+preload = ["./test/preload.ts"]
+rerunEach = 3
+coverage = true
+coverageReporter = ["text", "lcov"]
+coverageSkipTestFiles = true
+coverageThreshold = { lines = 0.8, functions = 0.8, statements = 0.8 }

@@ -90,6 +90,7 @@ Validation commands used during implementation:
 
 - **No CI, lint, formatter, or pre-commit config exists** — do not assume hidden checks
 - Use `bun-instructions.md` for Bun-specific API guidance (Bun.serve, Bun.file, Bun.sql, etc.)
+- Testing best practices and Bun test conventions: `references/testing-best-practices-bun.md`
 
 ## Next Iterations (Roadmap)
 
