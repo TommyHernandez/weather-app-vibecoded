@@ -1,8 +1,8 @@
-import { ask } from "../../cli/io.ts"
-import { geocodeCityCandidates } from "../../services/weather.service.ts"
-import type { AppState, SavedCity } from "../../types/app.ts"
-import type { GeocodingResult } from "../../types/weather-api.ts"
-import { error, info, muted, success, warning } from "../../ui/messages.ts"
+import { ask } from "../presentation/input.ts"
+import { geocodeCityCandidates } from "../api/weather.service.ts"
+import type { AppState, SavedCity } from "../types/app.ts"
+import type { GeocodingResult } from "../types/weather-api.ts"
+import { error, info, muted, success, warning } from "../presentation/output.ts"
 import {
   cityExists,
   cityLabel,

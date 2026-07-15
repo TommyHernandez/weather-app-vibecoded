@@ -1,8 +1,8 @@
-import { getCurrentWeather, getDailyForecast } from "../../services/weather.service.ts"
-import type { AppState, SavedCity } from "../../types/app.ts"
-import type { DailyForecastSnapshot, WeatherSnapshot } from "../../types/weather-api.ts"
-import { colors } from "../../ui/colors.ts"
-import { error, info, muted, success, warning } from "../../ui/messages.ts"
+import { getCurrentWeather, getDailyForecast } from "../api/weather.service.ts"
+import type { AppState, SavedCity } from "../types/app.ts"
+import type { DailyForecastSnapshot, WeatherSnapshot } from "../types/weather-api.ts"
+import { colors } from "../presentation/colors.ts"
+import { error, info, muted, success, warning } from "../presentation/output.ts"
 import { cityLabel, cityMatches, resolveCity, updateStateCityReferences } from "./shared.ts"
 
 function weatherLine(city: SavedCity, weather: WeatherSnapshot): string {

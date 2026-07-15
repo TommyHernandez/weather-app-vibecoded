@@ -1,7 +1,7 @@
-import { geocodeCity } from "../../services/weather.service.ts"
-import type { AppState, SavedCity } from "../../types/app.ts"
-import type { GeocodingResult } from "../../types/weather-api.ts"
-import { info } from "../../ui/messages.ts"
+import { geocodeCity } from "../api/weather.service.ts"
+import type { AppState, SavedCity } from "../types/app.ts"
+import type { GeocodingResult } from "../types/weather-api.ts"
+import { info } from "../presentation/output.ts"
 
 function normalize(value: string): string {
   return value.trim().toLowerCase()

@@ -2,9 +2,9 @@
 
 ## Project Status
 
-Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/app/app.ts`.
+Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/presentation/app.ts`.
 
-Latest implemented iteration: **Iteration 4 (color consistency)**.
+Latest implemented iteration: **Iteration 4 (color consistency)** + directory restructuring.
 
 Current behavior highlights:
 
@@ -18,17 +18,21 @@ Current behavior highlights:
 
 Current architecture is split by responsibility:
 
-- `src/app/` — app loop and action modules
-- `src/app/actions/geocoding-actions.ts` — city search/add/remove/default workflows
-- `src/app/actions/weather-actions.ts` — current weather and 7-day forecast workflows
-- `src/app/actions/shared.ts` — shared city helpers (label, resolve, matches, indexing)
-- `src/app/actions/index.ts` — action barrel exports used by `app.ts`
-- `src/services/` — Open-Meteo API integration
-- `src/state/` — load/save persisted state (`weather-data.json`)
-- `src/ui/` — console colors/messages/menu rendering
+- `src/actions/` — action modules (user workflows)
+  - `geocoding-actions.ts` — city search/add/remove/default workflows
+  - `weather-actions.ts` — current weather and 7-day forecast workflows
+  - `shared.ts` — shared city helpers (label, resolve, matches, indexing)
+  - `index.ts` — action barrel exports
+- `src/presentation/` — CLI interaction layer
+  - `app.ts` — main app loop and menu dispatch
+  - `menu.ts` — menu rendering
+  - `output.ts` — user-facing messages (info/success/warning/error/muted)
+  - `input.ts` — readline input helpers
+  - `colors.ts` — ANSI color utilities
+- `src/api/` — Open-Meteo API integration (geocoding + weather + forecast)
+- `src/storage/` — load/save persisted state (`weather-data.json`)
 - `src/types/` — shared TypeScript types/interfaces
-- `src/config/` — constants
-- `src/cli/` — readline input helpers
+- `src/utils/` — constants
 
 ## Spec Target (from README)
 

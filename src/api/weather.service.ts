@@ -1,4 +1,4 @@
-import { FORECAST_URL, GEOCODING_URL } from "../config/constants.ts"
+import { FORECAST_URL, GEOCODING_URL } from "../utils/constants.ts"
 import type { WeatherUnit } from "../types/app.ts"
 import type {
   DailyForecastResponse,

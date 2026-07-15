@@ -1,8 +1,8 @@
-import { closeInput, ask } from "../cli/io.ts"
-import { loadState, saveState } from "../state/state.repository.ts"
+import { closeInput, ask } from "./input.ts"
+import { loadState, saveState } from "../storage/state.repository.ts"
 import type { MenuOption } from "../types/app.ts"
-import { printMenu } from "../ui/menu.ts"
-import { error, success } from "../ui/messages.ts"
+import { printMenu } from "./menu.ts"
+import { error, success } from "./output.ts"
 import {
   removeCity,
   searchAndAddCity,
@@ -11,7 +11,7 @@ import {
   showDefaultCityForecast,
   showDefaultCityWeather,
   toggleUnit,
-} from "./actions/index.ts"
+} from "../actions/index.ts"
 
 function isMenuOption(option: string): option is MenuOption {
   return option === "1" || option === "2" || option === "3" || option === "4" || option === "5" || option === "6" || option === "8" || option === "9"

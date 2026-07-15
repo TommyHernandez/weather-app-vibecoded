@@ -1,3 +1,3 @@
-import { runApp } from "./src/app/app.ts"
+import { runApp } from "./src/presentation/app.ts"
 
 await runApp()

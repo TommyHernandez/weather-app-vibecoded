@@ -1,4 +1,4 @@
-import { SEPARATOR } from "../config/constants.ts"
+import { SEPARATOR } from "../utils/constants.ts"
 import type { AppState } from "../types/app.ts"
 import { colors } from "./colors.ts"
 

@@ -1,4 +1,4 @@
-import { DATA_FILE } from "../config/constants.ts"
+import { DATA_FILE } from "../utils/constants.ts"
 import type { AppState, SavedCity } from "../types/app.ts"
 
 function createDefaultState(): AppState {
