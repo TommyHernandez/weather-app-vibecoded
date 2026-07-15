@@ -1,11 +1,12 @@
 {
-  "name": "02-weather",
+  "name": "weather-app-vibecoded",
+  "version": "1.0.0",
   "description": "A simple terminal app to know the weather in a concrete city",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "bun build index.ts --outdir dist --target=bun",
+    "build": "mkdir -p dist && bun build index.ts --compile --target=bun-linux-x64 --outfile dist/weather-app-vibecoded-linux-x64 && bun build index.ts --compile --target=bun-windows-x64 --outfile dist/weather-app-vibecoded-windows-x64.exe && bun build index.ts --compile --target=bun-darwin-x64 --outfile dist/weather-app-vibecoded-darwin-x64",
     "start": "bun index.ts",
     "dev": "bun index.ts",
     "dev:hot": "bun --hot index.ts",
