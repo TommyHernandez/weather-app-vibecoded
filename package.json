@@ -1,6 +1,6 @@
 {
   "name": "weather-app-vibecoded",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple terminal app to know the weather in a concrete city",
   "module": "index.ts",
   "type": "module",
