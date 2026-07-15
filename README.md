@@ -36,8 +36,19 @@ Scripts disponibles:
 
 - `bun run dev` - ejecuta la app en modo normal
 - `bun run dev:hot` - ejecuta con hot reload
-- `bun run build` - genera build en `dist/` (target Bun)
+- `bun run build` - compila binarios x64 para Linux/Windows/macOS en `dist/`
 - `bun run start` - ejecuta `index.ts`
+
+## Tests
+
+- `bun run test` - ejecuta los tests unitarios
+- `bun run test:watch` - ejecuta tests en modo watch
+- `bun run test:coverage` - genera reporte de cobertura
+
+La configuración de pruebas usa `bunfig.toml`:
+
+- `preload` con `test/preload.ts`
+- umbral mínimo de cobertura del 80% para líneas, funciones y statements
 
 ## Flujo de API
 

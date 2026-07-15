@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Run tests
+        run: bun run test
+
       - name: Compute version and tag
         id: version
         run: |

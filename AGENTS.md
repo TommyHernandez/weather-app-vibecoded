@@ -70,7 +70,13 @@ Example geocoding fields currently used in app state:
 - `bun index.ts` — run CLI
 - `bun dev` — run CLI via script (`bun index.ts`)
 - `bun run dev:hot` — dev loop with hot reload
-- `bun run build` — build to `dist/`
+- `bun run build` — compile standalone x64 binaries to `dist/`:
+  - `dist/weather-app-vibecoded-linux-x64`
+  - `dist/weather-app-vibecoded-windows-x64.exe`
+  - `dist/weather-app-vibecoded-darwin-x64`
+- `bun run test` — run test suite
+- `bun run test:watch` — run tests in watch mode
+- `bun run test:coverage` — run tests with coverage report
 
 Validation commands used during implementation:
 
@@ -86,9 +92,24 @@ Validation commands used during implementation:
 - `types: ["bun"]` — Bun types available globally
 - `noEmit: true` — Bun runs directly; no tsc emit step
 
+## CI / Release Pipeline
+
+- Workflow file: `.github/workflows/release.yml`
+- Trigger: every push to `main`
+- Release tag format: `v_<version>` from `package.json`
+- If remote tag already exists, workflow fails intentionally (version bump required)
+- Pipeline order: install deps -> run tests (`bun run test`) -> build binaries (`bun run build`) -> create GitHub Release
+- Release notes are automatic (`generate_release_notes: true`)
+
+### How to Cut a Release
+
+1. Update `version` in `package.json` (example: `1.0.0` -> `1.0.1`).
+2. Commit the version bump and push to `main`.
+3. GitHub Actions runs `.github/workflows/release.yml` automatically.
+4. Workflow creates release tag `v_<version>` and uploads binaries from `dist/`.
+
 ## Repo Gotchas
 
-- **No CI, lint, formatter, or pre-commit config exists** — do not assume hidden checks
 - Use `bun-instructions.md` for Bun-specific API guidance (Bun.serve, Bun.file, Bun.sql, etc.)
 - Testing best practices and Bun test conventions: `references/testing-best-practices-bun.md`
 
