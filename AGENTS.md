@@ -2,7 +2,17 @@
 
 ## Project Status
 
-Bun + TypeScript CLI scaffold. Entrypoint `index.ts` (per `package.json` `"module"`). Current code is placeholder; `README.md` is the functional spec (Weather CLI with Open-Meteo).
+Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/app/app.ts`.
+
+Current architecture is split by responsibility:
+
+- `src/app/` — app loop and menu actions
+- `src/services/` — Open-Meteo API integration
+- `src/state/` — load/save persisted state (`weather-data.json`)
+- `src/ui/` — console colors/messages/menu rendering
+- `src/types/` — shared TypeScript types/interfaces
+- `src/config/` — constants
+- `src/cli/` — readline input helpers
 
 ## Spec Target (from README)
 
@@ -24,7 +34,9 @@ Menu-driven CLI with options:
 
 - `bun install` — install deps
 - `bun index.ts` — run CLI
-- `bun --hot index.ts` — dev loop with hot reload
+- `bun dev` — run CLI via script (`bun index.ts`)
+- `bun run dev:hot` — dev loop with hot reload
+- `bun run build` — build to `dist/`
 - `bun test` — run tests (once they exist)
 
 ## TypeScript Constraints

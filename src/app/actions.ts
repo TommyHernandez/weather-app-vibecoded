@@ -21,6 +21,11 @@ function cityExists(state: AppState, cityName: string): boolean {
   return state.cities.some((savedCity) => normalizeCityName(savedCity) === normalizedTarget)
 }
 
+function isAffirmative(answer: string): boolean {
+  const normalized = answer.trim().toLowerCase()
+  return normalized === "s" || normalized === "si"
+}
+
 async function searchCity(cityName: string): Promise<GeocodingResult | null> {
   muted("Buscando...")
   return geocodeCity(cityName)
@@ -75,6 +80,8 @@ export async function showAllCitiesWeather(state: AppState): Promise<void> {
 }
 
 export async function searchAndAddCity(state: AppState): Promise<void> {
+  const hadSavedCitiesBeforeAdd = state.cities.length > 0
+
   const input = await ask("  Ingresa el nombre de la ciudad a buscar: ")
   const cityName = input.trim()
   if (!cityName) {
@@ -94,8 +101,8 @@ export async function searchAndAddCity(state: AppState): Promise<void> {
   }
 
   info(`Se encontró: ${cityLabel(location)}`)
-  const confirm = (await ask("  ¿Agregar esta ciudad? (s/N): ")).trim().toLowerCase()
-  if (confirm !== "s" && confirm !== "si") {
+  const confirm = await ask("  ¿Agregar esta ciudad? (s/N): ")
+  if (!isAffirmative(confirm)) {
     muted("Operación cancelada.")
     return
   }
@@ -106,6 +113,17 @@ export async function searchAndAddCity(state: AppState): Promise<void> {
   if (!state.defaultCity) {
     state.defaultCity = location.name
     info(`"${location.name}" establecida como ciudad default.`)
+    return
+  }
+
+  if (!hadSavedCitiesBeforeAdd) {
+    return
+  }
+
+  const setAsDefault = await ask(`  ¿Quieres establecer "${location.name}" como ciudad default? (s/N): `)
+  if (isAffirmative(setAsDefault)) {
+    state.defaultCity = location.name
+    success(`Ciudad default cambiada a "${location.name}".`)
   }
 }
 
