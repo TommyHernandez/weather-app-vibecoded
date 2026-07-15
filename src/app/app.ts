@@ -60,8 +60,6 @@ export async function runApp(): Promise<void> {
         case "8":
           toggleUnit(state)
           break
-        case "9":
-          break
       }
 
       await saveState(state)

@@ -4,7 +4,7 @@ import type { ForecastResponse, GeocodingResponse, GeocodingResult, WeatherSnaps
 
 function buildGeocodingUrl(cityName: string): string {
   const encodedName = encodeURIComponent(cityName)
-  return `${GEOCODING_URL}?name=${encodedName}&count=1&language=es&format=json`
+  return `${GEOCODING_URL}?name=${encodedName}&count=5&language=es&format=json`
 }
 
 function buildForecastUrl(latitude: number, longitude: number, unit: WeatherUnit): string {
@@ -25,6 +25,16 @@ export async function geocodeCity(cityName: string): Promise<GeocodingResult | n
   }
 
   return firstResult
+}
+
+export async function geocodeCityCandidates(cityName: string): Promise<GeocodingResult[]> {
+  const response = await fetch(buildGeocodingUrl(cityName))
+  if (!response.ok) {
+    return []
+  }
+
+  const payload = (await response.json()) as GeocodingResponse
+  return payload.results ?? []
 }
 
 export async function getCurrentWeather(

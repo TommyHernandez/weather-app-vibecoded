@@ -1,0 +1,4 @@
+- [ ] **Escalabilidad**: ¿qué tan fácil será expandir con nuevas funcionalidades?
+- [ ] Ciudades: geocoding solo trae 1 resultado; nombres ambiguos pueden fallar.
+- [ ] **Feature**: Implementar el 7 days forecast
+- [ ] **Colores:** no hay ninguno; falta definir cyan (menú), amarillo (temp), verde/rojo (ok/error).

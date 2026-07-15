@@ -4,6 +4,15 @@
 
 Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/app/app.ts`.
 
+Latest implemented iteration: **Iteration 2 (ambiguous cities)**.
+
+Current behavior highlights:
+
+- Cities are persisted as structured objects (`SavedCity`) with coordinates.
+- Geocoding now requests multiple candidates (`count=5`).
+- If a search is ambiguous, user selects one option from a numbered list.
+- Selected city is stored with coordinates to avoid future ambiguity.
+
 Current architecture is split by responsibility:
 
 - `src/app/` — app loop and menu actions
@@ -25,10 +34,22 @@ Menu-driven CLI with options:
 - set default city
 - settings (units)
 
+Current delivered scope matches these menu options for current weather workflows.
+
 ## API Flow
 
-1. Geocode city name → lat/lon via `https://geocoding-api.open-meteo.com/v1/search?name=...`
+1. Geocode city name → candidates via `https://geocoding-api.open-meteo.com/v1/search?name=...&count=5`
+2. If multiple matches: ask user to pick one result.
 2. Fetch weather via `https://api.open-meteo.com/v1/forecast?latitude=..&longitude=..&current=temperature_2m`
+
+Example geocoding fields currently used in app state:
+
+- `name`
+- `latitude`
+- `longitude`
+- `admin1` (optional)
+- `country` (optional)
+- `country_code` (optional)
 
 ## Commands
 
@@ -37,7 +58,11 @@ Menu-driven CLI with options:
 - `bun dev` — run CLI via script (`bun index.ts`)
 - `bun run dev:hot` — dev loop with hot reload
 - `bun run build` — build to `dist/`
-- `bun test` — run tests (once they exist)
+
+Validation commands used during implementation:
+
+- `bun run build`
+- `bunx tsc --noEmit`
 
 ## TypeScript Constraints
 
@@ -52,3 +77,8 @@ Menu-driven CLI with options:
 
 - **No CI, lint, formatter, or pre-commit config exists** — do not assume hidden checks
 - Use `bun-instructions.md` for Bun-specific API guidance (Bun.serve, Bun.file, Bun.sql, etc.)
+
+## Next Iterations (Roadmap)
+
+1. **Iteration 3**: add 7-day forecast feature.
+2. **Iteration 4**: color consistency pass (menu/info/temp/success/error).

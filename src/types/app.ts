@@ -1,8 +1,17 @@
 export type WeatherUnit = "C" | "F"
 
+export interface SavedCity {
+  name: string
+  latitude: number
+  longitude: number
+  admin1?: string
+  country?: string
+  country_code?: string
+}
+
 export interface AppState {
-  defaultCity: string | null
-  cities: string[]
+  defaultCity: SavedCity | null
+  cities: SavedCity[]
   unit: WeatherUnit
 }
 

@@ -1,5 +1,5 @@
 import { DATA_FILE } from "../config/constants.ts"
-import type { AppState } from "../types/app.ts"
+import type { AppState, SavedCity } from "../types/app.ts"
 
 function createDefaultState(): AppState {
   return {
@@ -20,12 +20,48 @@ function sanitizeState(rawData: unknown): AppState {
     unit?: unknown
   }
 
-  const defaultCity = typeof data.defaultCity === "string"
-    ? data.defaultCity
-    : null
+  const sanitizeCity = (city: unknown): SavedCity | null => {
+    if (typeof city === "string") {
+      const trimmedName = city.trim()
+      if (!trimmedName) {
+        return null
+      }
+
+      return {
+        name: trimmedName,
+        latitude: Number.NaN,
+        longitude: Number.NaN,
+      }
+    }
+
+    if (typeof city === "object" && city !== null) {
+      const c = city as Partial<SavedCity>
+
+      if (typeof c.name !== "string" || !c.name.trim()) {
+        return null
+      }
+
+      return {
+        name: c.name,
+        latitude: typeof c.latitude === "number" ? c.latitude : Number.NaN,
+        longitude: typeof c.longitude === "number" ? c.longitude : Number.NaN,
+        admin1: typeof c.admin1 === "string" ? c.admin1 : undefined,
+        country: typeof c.country === "string" ? c.country : undefined,
+        country_code: typeof c.country_code === "string" ? c.country_code : undefined,
+      }
+    }
+
+    return null
+  }
+
+  const defaultCity = (data.defaultCity === null || data.defaultCity === undefined)
+    ? null
+    : sanitizeCity(data.defaultCity)
 
   const cities = Array.isArray(data.cities)
-    ? data.cities.filter((city: unknown): city is string => typeof city === "string")
+    ? data.cities
+      .map(sanitizeCity)
+      .filter((city): city is SavedCity => city !== null)
     : []
 
   const unit = data.unit === "F" ? "F" : "C"
