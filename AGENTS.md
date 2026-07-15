@@ -77,6 +77,7 @@ Example geocoding fields currently used in app state:
 - `bun run test` — run test suite
 - `bun run test:watch` — run tests in watch mode
 - `bun run test:coverage` — run tests with coverage report
+- `bun run test:ci` — run tests with coverage thresholds for CI
 
 Validation commands used during implementation:
 
@@ -98,7 +99,7 @@ Validation commands used during implementation:
 - Trigger: every push to `main`
 - Release tag format: `v_<version>` from `package.json`
 - If remote tag already exists, workflow fails intentionally (version bump required)
-- Pipeline order: install deps -> run tests (`bun run test`) -> build binaries (`bun run build`) -> create GitHub Release
+- Pipeline order: install deps -> run tests (`bun run test:ci`) -> build binaries (`bun run build`) -> create GitHub Release
 - Release notes are automatic (`generate_release_notes: true`)
 
 ### How to Cut a Release

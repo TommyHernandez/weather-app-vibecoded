@@ -44,11 +44,13 @@ Scripts disponibles:
 - `bun run test` - ejecuta los tests unitarios
 - `bun run test:watch` - ejecuta tests en modo watch
 - `bun run test:coverage` - genera reporte de cobertura
+- `bun run test:ci` - ejecuta tests con cobertura y umbrales para CI
 
 La configuración de pruebas usa `bunfig.toml`:
 
 - `preload` con `test/preload.ts`
-- umbral mínimo de cobertura del 80% para líneas, funciones y statements
+- `bun run test` no forza cobertura por defecto
+- umbral mínimo de cobertura del 80% para líneas, funciones y statements (cuando se usa `--coverage`)
 
 ## Flujo de API
 

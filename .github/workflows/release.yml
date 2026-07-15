@@ -25,7 +25,7 @@ jobs:
         run: bun install
 
       - name: Run tests
-        run: bun run test
+        run: bun run test:ci
 
       - name: Compute version and tag
         id: version
