@@ -4,7 +4,7 @@
 
 Bun + TypeScript Weather CLI implemented. Entrypoint `index.ts` delegates to `src/app/app.ts`.
 
-Latest implemented iteration: **Iteration 2 (ambiguous cities)**.
+Latest implemented iteration: **Iteration 3 (7-day forecast)**.
 
 Current behavior highlights:
 
@@ -12,10 +12,16 @@ Current behavior highlights:
 - Geocoding now requests multiple candidates (`count=5`).
 - If a search is ambiguous, user selects one option from a numbered list.
 - Selected city is stored with coordinates to avoid future ambiguity.
+- New menu option to show 7-day forecast for default city.
+- Forecast output prints daily min/max temperatures for 7 days.
 
 Current architecture is split by responsibility:
 
-- `src/app/` — app loop and menu actions
+- `src/app/` — app loop and action modules
+- `src/app/actions/geocoding-actions.ts` — city search/add/remove/default workflows
+- `src/app/actions/weather-actions.ts` — current weather and 7-day forecast workflows
+- `src/app/actions/shared.ts` — shared city helpers (label, resolve, matches, indexing)
+- `src/app/actions/index.ts` — action barrel exports used by `app.ts`
 - `src/services/` — Open-Meteo API integration
 - `src/state/` — load/save persisted state (`weather-data.json`)
 - `src/ui/` — console colors/messages/menu rendering
@@ -32,6 +38,7 @@ Menu-driven CLI with options:
 - search/add city
 - remove city
 - set default city
+- 7-day forecast for default city
 - settings (units)
 
 Current delivered scope matches these menu options for current weather workflows.
@@ -40,7 +47,8 @@ Current delivered scope matches these menu options for current weather workflows
 
 1. Geocode city name → candidates via `https://geocoding-api.open-meteo.com/v1/search?name=...&count=5`
 2. If multiple matches: ask user to pick one result.
-2. Fetch weather via `https://api.open-meteo.com/v1/forecast?latitude=..&longitude=..&current=temperature_2m`
+3. Fetch current weather via `https://api.open-meteo.com/v1/forecast?latitude=..&longitude=..&current=temperature_2m`
+4. Fetch 7-day forecast via `https://api.open-meteo.com/v1/forecast?latitude=..&longitude=..&daily=temperature_2m_max,temperature_2m_min&forecast_days=7`
 
 Example geocoding fields currently used in app state:
 
@@ -80,5 +88,4 @@ Validation commands used during implementation:
 
 ## Next Iterations (Roadmap)
 
-1. **Iteration 3**: add 7-day forecast feature.
-2. **Iteration 4**: color consistency pass (menu/info/temp/success/error).
+1. **Iteration 4**: color consistency pass (menu/info/temp/success/error).

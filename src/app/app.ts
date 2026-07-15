@@ -8,12 +8,13 @@ import {
   searchAndAddCity,
   setDefaultWeatherCity,
   showAllCitiesWeather,
+  showDefaultCityForecast,
   showDefaultCityWeather,
   toggleUnit,
-} from "./actions.ts"
+} from "./actions/index.ts"
 
 function isMenuOption(option: string): option is MenuOption {
-  return option === "1" || option === "2" || option === "3" || option === "4" || option === "5" || option === "8" || option === "9"
+  return option === "1" || option === "2" || option === "3" || option === "4" || option === "5" || option === "6" || option === "8" || option === "9"
 }
 
 export async function runApp(): Promise<void> {
@@ -56,6 +57,9 @@ export async function runApp(): Promise<void> {
           break
         case "5":
           await setDefaultWeatherCity(state)
+          break
+        case "6":
+          await showDefaultCityForecast(state)
           break
         case "8":
           toggleUnit(state)

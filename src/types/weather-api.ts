@@ -24,6 +24,33 @@ export interface ForecastResponse {
   current_units?: CurrentUnits
 }
 
+export interface DailyWeather {
+  time: string[]
+  temperature_2m_max: number[]
+  temperature_2m_min: number[]
+}
+
+export interface DailyUnits {
+  temperature_2m_max?: string
+  temperature_2m_min?: string
+}
+
+export interface DailyForecastResponse {
+  daily?: DailyWeather
+  daily_units?: DailyUnits
+}
+
+export interface DailyForecastItem {
+  date: string
+  max: number
+  min: number
+}
+
+export interface DailyForecastSnapshot {
+  items: DailyForecastItem[]
+  unitLabel: string
+}
+
 export interface WeatherSnapshot {
   temperature: number
   unitLabel: string

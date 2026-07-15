@@ -9,6 +9,7 @@ La app permite:
 - Buscar y agregar ciudades.
 - Eliminar ciudades.
 - Establecer ciudad default.
+- Ver pronóstico de 7 días para la ciudad default.
 - Cambiar unidades entre `°C` y `°F`.
 
 ## Stack
@@ -33,14 +34,17 @@ Scripts disponibles:
 
 ## Flujo de API
 
-1. Geocoding para resolver ciudad a coordenadas.
-2. Forecast para consultar `current=temperature_2m`.
+1. Geocoding para resolver ciudad a coordenadas (`count=5`).
+2. Si hay ambigüedad, selección interactiva por número.
+3. Forecast para consultar clima actual (`current=temperature_2m`).
+4. Forecast diario para 7 días (`daily=temperature_2m_max,temperature_2m_min&forecast_days=7`).
 
 Ejemplos:
 
 ```text
 https://geocoding-api.open-meteo.com/v1/search?name=Ottawa&count=5&language=es&format=json
 https://api.open-meteo.com/v1/forecast?latitude=45.41117&longitude=-75.69812&current=temperature_2m
+https://api.open-meteo.com/v1/forecast?latitude=45.41117&longitude=-75.69812&daily=temperature_2m_max,temperature_2m_min&forecast_days=7
 ```
 
 ## Mejora implementada: ciudades ambiguas
@@ -64,6 +68,14 @@ Los datos se guardan en `weather-data.json` con estructura de ciudad enriquecida
 
 La carga de estado mantiene compatibilidad con formatos anteriores.
 
+## Pronóstico 7 días
+
+La opción `6` del menú muestra el pronóstico de 7 días para la ciudad default.
+
+- Usa temperaturas mínimas y máximas diarias.
+- Respeta la unidad configurada (`°C` / `°F`).
+- Si faltan coordenadas en una ciudad legacy, primero resuelve geocoding y actualiza el estado en memoria.
+
 ## Ejemplo de menú
 
 ```bash
@@ -80,6 +92,7 @@ La carga de estado mantiene compatibilidad con formatos anteriores.
   3. Buscar y agregar ciudad
   4. Eliminar ciudad
   5. Establecer ciudad default
+  6. Pronóstico 7 días (default)
   8. Ajustes (°C)
   9. Salir
 ════════════════════════════════════════
