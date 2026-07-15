@@ -97,6 +97,7 @@ Validation commands used during implementation:
 
 - Workflow file: `.github/workflows/release.yml`
 - Trigger: every push to `main`
+- Workflow env sets `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` to test JS-based GitHub Actions on Node24
 - Release tag format: `v_<version>` from `package.json`
 - If remote tag already exists, workflow fails intentionally (version bump required)
 - Pipeline order: install deps -> run tests (`bun run test:ci`) -> build binaries (`bun run build`) -> create GitHub Release
